@@ -13,8 +13,9 @@ CLASSES = ['aeroplane', 'bicycle', 'bird', 'boat', 'bottle', 'bus',
            'motorbike', 'person', 'pottedplant', 'sheep', 'sofa',
            'train', 'tvmonitor']
 
-pascal_path = 'C:\VOC2012\VOCdevkit\VOC2012'
-img_dir ='C:\VOC2012\VOCdevkit\VOC2012\JPEGImages'
+pascal_path = '/Users/mhahn/workspace/TC/tf-ws/datas/VOCdevkit/VOC2012'
+#img_dir ='/Users/mhahn/workspace/TC/tf-ws/datas/VOCdevkit/VOC2012/JPEGImages'
+img_dir = os.path.join(pascal_path, 'JPEGImages')
 data_path = os.path.join(pascal_path,'Annotations')
 test_path = os.path.join(data_path, '2007_000027.xml')
 
