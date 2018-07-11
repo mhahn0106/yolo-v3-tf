@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 from yolo.yolo3 import *
 from util.cfg import *
-from datas.data_generate import load_batch
+#from datas.data_generate import load_batch
 from util.process_voc import load_batch as load_voc
 import time
 from resnet.net import *
@@ -18,7 +18,7 @@ class SOVLER(object):
         self.BATCHSIZE = batch_size
         self.LEARNING_RATE = lr
         self.net = YOLO2()
-        self.dict = np.load('D:\CODE5.24\ResYOLO\\resnet\\reskey.npy').item()
+        self.dict = np.load('resnet/reskey.npy').item()
         self.res = RESNET(self.dict,training=True)
         self.init()
         self.feat1, self.feat2, self.feat3 = self.res.feat
@@ -45,7 +45,7 @@ class SOVLER(object):
         self.vars = tf.global_variables()
         self.resvars = self.res.var
         self.save_res = tf.train.Saver(var_list=self.resvars)
-        self.restore()
+        #self.restore()
 
     def restore(self):
         self.save_res.restore(self.sess, './ResWeight/ResNet-L50.ckpt')
@@ -79,7 +79,7 @@ class SOVLER(object):
             print('OVER restore %f seconds'%(te-ts))
         if is_pretrain == False:
             print('START TRAINING ')
-            self.sess.run(tf.variables_initializer(initvars))
+            self.sess.run(tf.variables_initializer(vars))#initvars))
         step = 0
         for i in range(1,21):
             # datas = load_batch(self.BATCHSIZE)
