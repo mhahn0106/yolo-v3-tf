@@ -96,7 +96,7 @@ class YOLO2(object):
             pred_box_trans = self.loc_process(loc, cell_size, anchor, x_off, y_off)
 
             iou = cal_iou(pred_box_trans, loc_label)
-            max_iou = tf.reduce_max(iou, axis=3, keep_dims=True)
+            max_iou = tf.reduce_max(iou, axis=3, keepdims=True)
             # iou_max = tf.cast(iou >= max_iou, tf.float32) * iou  # ioumask shape [0,13,13,5]
             iou_mask = tf.cast(max_iou >= iou_threshold, tf.float32) * center_response
 
@@ -104,7 +104,7 @@ class YOLO2(object):
             noobj_mask = tf.cast(noobject_iou < iou_threshold, tf.float32)
 
             cla_loss = self.CLASS_SCALE * tf.reduce_sum(
-                tf.nn.softmax_cross_entropy_with_logits(logits=cla, labels=cla_label,
+                tf.nn.softmax_cross_entropy_with_logits_v2(logits=cla, labels=tf.stop_gradient(cla_label),
                                                         dim=4) * center_response) / batch_size
             #
             tf.summary.scalar('cla_loss', cla_loss)
