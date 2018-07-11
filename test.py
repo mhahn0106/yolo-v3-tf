@@ -1,6 +1,6 @@
 from yolo.yolo3 import *
 from util.cfg import *
-from datas.data_generate import load_batch
+#from datas.data_generate import load_batch
 # from util.process_voc import load_batch as load_voc
 import time
 from resnet.net import *
@@ -17,7 +17,7 @@ class SOLVER(object):
         self.BATCHSIZE = batch_size
         self.LEARNING_RATE = lr
         self.net = YOLO2()
-        self.dict = np.load('D:\CODE5.24\ResYOLO\\resnet\\reskey.npy').item()
+        self.dict = np.load('resnet/reskey.npy').item()
         self.res = RESNET(self.dict,False)
         self.init()
         self.feat1, self.feat2, self.feat3 = self.res.feat
@@ -126,26 +126,6 @@ class SOLVER(object):
 
 if __name__ == '__main__':
     solver = SOLVER()
-    # print(solver.filter_c.shape, solver.conf_pred.shape, solver.box.shape)
-    # solver.test('./image/test3.jpg')
+    print(solver.filter_c.shape, solver.conf_pred.shape, solver.box.shape)
+    solver.test('./image/test3.jpg')
     # solver.detect_capture()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
