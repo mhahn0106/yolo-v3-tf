@@ -15,7 +15,6 @@ class SOLVER():
         self.dict = np.load('./resnet/reskey.npy').item()
         self.idx2_ = np.load('./resnet/idx2desc.npy').item()
         #self.logits = net.net(inputs=self.inputs, resdict=self.dict)
-        #net = RESNET()
         self.res = RESNET(self.dict,False)
         self.logits = self.res.net(inputs=self.inputs, resdict=self.dict)
 
