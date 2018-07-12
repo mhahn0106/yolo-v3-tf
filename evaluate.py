@@ -2,8 +2,8 @@
 # -*- coding:utf-8 -*-
 import tensorflow as tf
 import numpy as np
-#from resnet import net
-from resnet.net import *
+from resnet import net
+#from resnet.net import *
 import cv2
 
 VGG_MEAN = [103.939, 116.779, 123.68]
@@ -14,9 +14,9 @@ class SOLVER():
         self.inputs = tf.placeholder(tf.float32, [None, 416, 416, 3])
         self.dict = np.load('./resnet/reskey.npy').item()
         self.idx2_ = np.load('./resnet/idx2desc.npy').item()
-        #self.logits = net.net(inputs=self.inputs, resdict=self.dict)
-        self.res = RESNET(self.dict,False)
-        self.logits = self.res.net(inputs=self.inputs, resdict=self.dict)
+        self.logits = net.RESNET.net(self,inputs=self.inputs, resdict=self.dict)
+        #self.res = RESNET(self.dict,False)
+        #self.logits = self.res.net(inputs=self.inputs, resdict=self.dict)
 
     def imgprocess(self, path):
         img = cv2.imread(path)
