@@ -10,6 +10,7 @@ class RESNET():
         self.feat = self.net(self.x, resdict, training)
         self.var = tf.global_variables()
 
+    @staticmethod
     def net(self, inputs, resdict, training= False, is_fc= False):
         print('BUILE RES NET ')
         with tf.variable_scope('scale1'):
@@ -155,6 +156,3 @@ if __name__ == '__main__':
     a = tf.placeholder(tf.float32, [3,3,3,3])
     b = upsample(a)
     print(b.shape)
-
-
-
